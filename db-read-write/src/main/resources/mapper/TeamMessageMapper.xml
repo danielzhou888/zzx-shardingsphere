@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzx.sharding.mapper.TeamMessageMapper">
+
+	<resultMap type="com.zzx.sharding.entity.TeamMessage" id="messageResultMap">
+		<id property="id" column="id" jdbcType="BIGINT"/>
+		<result property="teamMsgId" column="team_msg_id" jdbcType="BIGINT"/>
+		<result property="teamClientMsgId" column="team_client_msg_id" jdbcType="VARCHAR"/>
+		<result property="msgType" column="msg_type" jdbcType="VARCHAR"/>
+		<result property="remindType" column="remind_type" jdbcType="TINYINT"/>
+		<result property="convType" column="conv_type" jdbcType="VARCHAR"/>
+		<result property="scene" column="scene" jdbcType="TINYINT"/>
+		<result property="text" column="text" jdbcType="VARCHAR"/>
+		<result property="teamAttachType" column="team_attach_type" jdbcType="TINYINT"/>
+		<result property="sendType" column="send_type" jdbcType="TINYINT"/>
+		<result property="sendClientIp" column="send_client_ip" jdbcType="VARCHAR"/>
+		<result property="sendClientPort" column="send_client_port" jdbcType="VARCHAR"/>
+		<result property="sendClientType" column="send_client_type" jdbcType="VARCHAR"/>
+		<result property="sendDeviceId" column="send_device_id" jdbcType="VARCHAR"/>
+		<result property="sendNick" column="send_nick" jdbcType="VARCHAR"/>
+		<result property="teamId" column="team_id" jdbcType="BIGINT"/>
+		<result property="sendId" column="send_id" jdbcType="VARCHAR"/>
+		<result property="sendAt" column="send_at" jdbcType="BIGINT"/>
+		<result property="msgReceiptTime" column="msg_receipt_time" jdbcType="BIGINT"/>
+		<result property="isRevoke" column="is_revoke" jdbcType="TINYINT"/>
+		<result property="revokeAt" column="revoke_at" jdbcType="BIGINT"/>
+		<result property="msgStatus" column="msg_status" jdbcType="TINYINT"/>
+		<result property="status" column="status" jdbcType="TINYINT"/>
+		<result property="eventType" column="event_type" jdbcType="TINYINT"/>
+		<result property="attach" column="attach" jdbcType="VARCHAR"/>
+		<result property="customApnsText" column="custom_apns_text" jdbcType="VARCHAR"/>
+		<result property="ext" column="ext" jdbcType="VARCHAR"/>
+		<result property="antispam" column="antispam" jdbcType="VARCHAR"/>
+		<result property="yidunRes" column="yidun_res" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<!--表名 -->
+	<sql id="tableName">
+		im_team_message
+	</sql>
+
+	<!-- 字段 -->
+	<sql id="Field">
+		id,
+		team_msg_id,
+		team_client_msg_id,
+		msg_type,
+		remind_type,
+		conv_type,
+		scene,
+		text,
+		team_attach_type,
+		send_type,
+		send_client_ip,
+		send_client_port,
+		send_client_type,
+		send_device_id,
+		send_nick,
+		team_id,
+		send_id,
+		send_at,
+		msg_receipt_time,
+		is_revoke,
+		revoke_at,
+		msg_status,
+		event_type,
+		status,
+		attach,
+		custom_apns_text,
+		ext,
+		antispam,
+		yidun_res
+	</sql>
+
+	<sql id="team-message-tm-field">
+		tm.id,
+		tm.team_msg_id,
+		tm.team_client_msg_id,
+		tm.msg_type,
+		tm.remind_type,
+		tm.conv_type,
+		tm.scene,
+		tm.text,
+		tm.team_attach_type,
+		tm.send_type,
+		tm.send_client_ip,
+		tm.send_client_port,
+		tm.send_client_type,
+		tm.send_device_id,
+		tm.send_nick,
+		tm.team_id,
+		tm.send_id,
+		tm.send_at,
+		tm.msg_receipt_time,
+		tm.is_revoke,
+		tm.revoke_at,
+		tm.msg_status,
+		tm.event_type,
+		tm.status,
+		tm.attach,
+		tm.custom_apns_text,
+		tm.ext,
+		tm.antispam,
+		tm.yidun_res
+	</sql>
+
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{id, jdbcType=BIGINT},
+		#{teamMsgId, jdbcType=BIGINT},
+		#{teamClientMsgId, jdbcType=VARCHAR},
+		#{msgType, jdbcType=VARCHAR},
+		#{remindType, jdbcType=TINYINT},
+		#{convType, jdbcType=VARCHAR},
+		#{scene, jdbcType=TINYINT},
+		#{text, jdbcType=VARCHAR},
+		#{teamAttachType, jdbcType=TINYINT},
+		#{sendType, jdbcType=TINYINT},
+		#{sendClientIp, jdbcType=VARCHAR},
+		#{sendClientPort, jdbcType=VARCHAR},
+		#{sendClientType, jdbcType=VARCHAR},
+		#{sendDeviceId, jdbcType=VARCHAR},
+		#{sendNick, jdbcType=VARCHAR},
+		#{teamId, jdbcType=BIGINT},
+		#{sendId, jdbcType=VARCHAR},
+		#{sendAt, jdbcType=BIGINT},
+		#{msgReceiptTime, jdbcType=BIGINT},
+		#{isRevoke, jdbcType=TINYINT},
+		#{revokeAt, jdbcType=BIGINT},
+		#{msgStatus, jdbcType=TINYINT},
+		#{eventType, jdbcType=TINYINT},
+		#{status, jdbcType=TINYINT},
+		#{attach, jdbcType=VARCHAR}
+		#{customApnsText, jdbcType=VARCHAR}
+		#{ext, jdbcType=VARCHAR}
+		#{antispam, jdbcType=VARCHAR}
+		#{yidunRes, jdbcType=VARCHAR}
+	</sql>
+
+	<sql id="listWhere">
+		<!--status = 0-->
+		<!--<if test="id != null and id > 0">-->
+			<!--and id = #{id}-->
+		<!--</if>-->
+		<!--<if test="technicalGroupId != null and technicalGroupId > 0">-->
+			<!--and technical_group_id = #{technicalGroupId}-->
+		<!--</if>-->
+		<!--<if test="waiterId != null and waiterId > 0">-->
+			<!--and waiter_id = #{waiterId}-->
+		<!--</if>-->
+		<!--<if test="createdAt != null and createdAt != ''">-->
+			<!--and created_at = #{createdAt}-->
+		<!--</if>-->
+		<!--<if test="createdBy != null and createdBy != ''">-->
+			<!--and created_by = #{createdBy}-->
+		<!--</if>-->
+		<!--<if test="changedAt != null and changedAt != ''">-->
+			<!--and changed_at = #{changedAt}-->
+		<!--</if>-->
+		<!--<if test="changedBy != null and changedBy != ''">-->
+			<!--and changed_by = #{changedBy}-->
+		<!--</if>-->
+
+	</sql>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.zzx.sharding.entity.TeamMessage">
+		INSERT IGNORE INTO
+		<include refid="tableName"/>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+  			<if test="id != null">
+  				id,
+  			</if>
+  			<if test="teamMsgId != null and teamMsgId > 0">
+				team_msg_id,
+  			</if>
+			<if test="teamClientMsgId != null and teamClientMsgId != ''">
+				team_client_msg_id,
+			</if>
+			<if test="msgType != null and msgType != ''">
+				msg_type,
+			</if>
+  			<if test="remindType != null">
+				remind_type,
+  			</if>
+			<if test="convType != null and convType != ''">
+				conv_type,
+			</if>
+			<if test="scene != null">
+				scene,
+			</if>
+			<if test="text != null and text != ''">
+				text,
+			</if>
+			<if test="teamAttachType != null">
+				team_attach_type,
+			</if>
+			<if test="sendType != null">
+				send_type,
+			</if>
+			<if test="sendClientIp != null and sendClientIp != ''">
+				send_client_ip,
+			</if>
+			<if test="sendClientPort != null and sendClientPort != ''">
+				send_client_port,
+			</if>
+			<if test="sendClientType != null">
+				send_client_type,
+			</if>
+			<if test="sendDeviceId != null and sendDeviceId != ''">
+				send_device_id,
+			</if>
+			<if test="sendNick != null and sendNick != ''">
+				send_nick,
+			</if>
+			<if test="teamId != null">
+				team_id,
+			</if>
+			<if test="sendId != null and sendId != ''">
+				send_id,
+			</if>
+			<if test="sendAt != null and sendAt > 0">
+				send_at,
+			</if>
+			<if test="msgReceiptTime != null and msgReceiptTime > 0">
+				msg_receipt_time,
+			</if>
+			<if test="revokeAt != null and revokeAt > 0">
+				revoke_at,
+			</if>
+			<if test="isRevoke != null">
+				is_revoke,
+			</if>
+			<if test="msgStatus != null">
+				msg_status,
+			</if>
+			<if test="eventType != null and eventType > 0">
+				event_type,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="attach != null and attach != ''">
+				attach,
+			</if>
+			<if test="customApnsText != null and customApnsText != ''">
+				custom_apns_text,
+			</if>
+			<if test="ext != null and ext != ''">
+				ext,
+			</if>
+			<if test="antispam != null and antispam != ''">
+				antispam,
+			</if>
+			<if test="yidunRes != null and yidunRes != ''">
+				yidun_res,
+			</if>
+  		</trim>
+  		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id, jdbcType=BIGINT},
+			</if>
+			<if test="teamMsgId != null and teamMsgId > 0">
+				#{teamMsgId, jdbcType=BIGINT},
+			</if>
+			<if test="teamClientMsgId != null and teamClientMsgId != ''">
+				#{teamClientMsgId, jdbcType=VARCHAR},
+			</if>
+			<if test="msgType != null and msgType != ''">
+				#{msgType, jdbcType=VARCHAR},
+			</if>
+			<if test="remindType != null">
+				#{remindType, jdbcType=TINYINT},
+			</if>
+			<if test="convType != null and convType != ''">
+				#{convType, jdbcType=TINYINT},
+			</if>
+			<if test="scene != null">
+				#{scene, jdbcType=TINYINT},
+			</if>
+			<if test="text != null and text != ''">
+				#{text, jdbcType=VARCHAR},
+			</if>
+			<if test="teamAttachType != null">
+				#{teamAttachType, jdbcType=TINYINT},
+			</if>
+			<if test="sendType != null">
+				#{sendType, jdbcType=TINYINT},
+			</if>
+			<if test="sendClientIp != null and sendClientIp != ''">
+				#{sendClientIp, jdbcType=VARCHAR},
+			</if>
+			<if test="sendClientPort != null and sendClientPort != ''">
+				#{sendClientPort, jdbcType=VARCHAR},
+			</if>
+			<if test="sendClientType != null">
+				#{sendClientType, jdbcType=TINYINT},
+			</if>
+			<if test="sendDeviceId != null and sendDeviceId != ''">
+				#{sendDeviceId, jdbcType=VARCHAR},
+			</if>
+			<if test="sendNick != null and sendNick != ''">
+				#{sendNick, jdbcType=VARCHAR},
+			</if>
+			<if test="teamId != null">
+				#{teamId, jdbcType=BIGINT},
+			</if>
+			<if test="sendId != null and sendId != ''">
+				#{sendId, jdbcType=VARCHAR},
+			</if>
+			<if test="sendAt != null and sendAt > 0">
+				#{sendAt, jdbcType=BIGINT},
+			</if>
+			<if test="msgReceiptTime != null and msgReceiptTime > 0">
+				#{msgReceiptTime, jdbcType=BIGINT},
+			</if>
+			<if test="revokeAt != null and revokeAt > 0">
+				#{revokeAt, jdbcType=BIGINT},
+			</if>
+			<if test="isRevoke != null">
+				#{isRevoke, jdbcType=TINYINT},
+			</if>
+			<if test="msgStatus != null">
+				#{msgStatus, jdbcType=TINYINT},
+			</if>
+			<if test="eventType != null and eventType > 0">
+				#{eventType, jdbcType=TINYINT},
+			</if>
+			<if test="status != null">
+				#{status, jdbcType=TINYINT},
+			</if>
+			<if test="attach != null and attach != ''">
+				#{attach, jdbcType=VARCHAR},
+			</if>
+			<if test="customApnsText != null and customApnsText != ''">
+				#{customApnsText, jdbcType=VARCHAR},
+			</if>
+			<if test="ext != null and ext != ''">
+				#{ext, jdbcType=VARCHAR},
+			</if>
+			<if test="antispam != null and antispam != ''">
+				#{antispam, jdbcType=VARCHAR},
+			</if>
+			<if test="yidunRes != null and yidunRes != ''">
+				#{yidunRes, jdbcType=VARCHAR},
+			</if>
+  		</trim>
+	</insert>
+
+	<insert id="insertSample">
+		insert into im_team_message (team_msg_id, msg_type) values ('1', 'WEB')
+	</insert>
+
+	<update id="update" parameterType="com.zzx.sharding.entity.TeamMessage">
+		update
+			<include refid="tableName"></include>
+		<set>
+			<if test="teamMsgId != null and teamMsgId > 0">
+				team_msg_id = #{teamMsgId, jdbcType=BIGINT},
+			</if>
+			<if test="teamClientMsgId != null and teamClientMsgId != ''">
+				team_client_msg_id = #{teamClientMsgId, jdbcType=VARCHAR},
+			</if>
+			<if test="msgType != null and msgType != ''">
+				msg_type = #{msgType, jdbcType=VARCHAR},
+			</if>
+			<if test="remindType != null">
+				remind_type = #{remindType, jdbcType=TINYINT},
+			</if>
+			<if test="convType != null">
+				conv_type = #{convType, jdbcType=VARCHAR},
+			</if>
+			<if test="scene != null">
+				scene = #{scene, jdbcType=TINYINT},
+			</if>
+			<if test="text != null and text != ''">
+				text = #{text, jdbcType=VARCHAR},
+			</if>
+			<if test="teamAttachType != null">
+				team_attach_type = #{teamAttachType, jdbcType=TINYINT},
+			</if>
+			<if test="sendType != null">
+				send_type = #{sendType, jdbcType=TINYINT},
+			</if>
+			<if test="sendClientIp != null and sendClientIp != ''">
+				send_client_ip = #{sendClientIp, jdbcType=VARCHAR},
+			</if>
+			<if test="sendClientPort != null and sendClientPort != ''">
+				send_client_port = #{sendClientPort, jdbcType=VARCHAR},
+			</if>
+			<if test="sendClientType != null">fgjfg
+				send_client_type = #{sendClientType, jdbcType=TINYINT},
+			</if>
+			<if test="sendDeviceId != null and sendDeviceId != ''">
+				send_device_id = #{sendDeviceId, jdbcType=VARCHAR},
+			</if>
+			<if test="sendNick != null and sendNick != ''">
+				send_nick#{sendNick, jdbcType=VARCHAR},
+			</if>
+			<if test="teamId != null">
+				team_id = #{teamId, jdbcType=BIGINT},
+			</if>
+			<if test="sendId != null and sendId != ''">
+				send_id = #{sendId, jdbcType=VARCHAR},
+			</if>
+			<if test="sendAt != null and sendAt > 0">
+				send_at = #{sendAt, jdbcType=BIGINT},
+			</if>
+			<if test="msgReceiptTime != null and msgReceiptTime > 0">
+				msg_receipt_time = #{msgReceiptTime, jdbcType=BIGINT},
+			</if>
+			<if test="revokeAt != null and revokeAt > 0">
+				revoke_at = #{revokeAt, jdbcType=BIGINT},
+			</if>
+			<if test="isRevoke != null">
+				is_revoke = #{isRevoke, jdbcType=TINYINT},
+			</if>
+			<if test="msgStatus != null">
+				msg_status = #{msgStatus, jdbcType=TINYINT},
+			</if>
+			<if test="eventType != null and eventType > 0">
+				event_type = #{eventType, jdbcType=TINYINT},
+			</if>
+			<if test="status != null">
+            	status = #{status, jdbcType=TINYINT},
+			</if>
+			<if test="attach != null and attach != ''">
+				attach = #{attach, jdbcType=VARCHAR},
+			</if>
+			<if test="customApnsText != null and customApnsText != ''">
+				custom_apns_text = #{customApnsText, jdbcType=VARCHAR},
+			</if>
+			<if test="ext != null and ext != ''">
+				ext = #{ext, jdbcType=VARCHAR},
+			</if>
+			<if test="antispam != null and antispam != ''">
+				antispam = #{antispam, jdbcType=VARCHAR},
+			</if>
+			<if test="yidunRes != null and yidunRes != ''">
+				yidunRes = #{yidunRes, jdbcType=VARCHAR},
+			</if>
+		</set>
+		where
+			id = #{id, jdbcType=BIGINT}
+	</update>
+
+	<update id="teamWithdrawMsg">
+		update <include refid="tableName"/>
+		set is_revoke = 1, revoke_at = #{deleteTime, jdbcType=BIGINT}
+		where team_msg_id = #{msgServerId, jdbcType=BIGINT}
+	</update>
+
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from
+			<include refid="tableName"/>
+		where
+			id = #{id, jdbcType=BIGINT}
+	</delete>
+
+	<select id="selectAll" resultType="com.zzx.sharding.entity.TeamMessage">
+		select
+			<include refid="Field"/>
+		from
+			<include refid="tableName"/>
+		where
+			status = 0
+	</select>
+
+	<select id="selectById" parameterType="java.lang.Long" resultType="com.zzx.sharding.entity.TeamMessage">
+		select
+			<include refid="Field"/>
+		from
+			<include refid="tableName"/>
+		where
+			status = 0
+		and
+			id = #{id, jdbcType=BIGINT}
+	</select>
+
+	<select id="getHistoryTeamMessagesFromTeam" resultType="com.zzx.sharding.entity.TeamMessage">
+		SELECT
+		<include refid="team-message-tm-field"/>
+		FROM
+			im_team_message tm
+		WHERE
+		tm.status = 0
+		AND tm.team_id = #{to, jdbcType=VARCHAR}
+		<if test="reverse == true">
+			<if test="beginTime != null and beginTime > 0">
+				<![CDATA[
+			 	AND tm.send_at > #{beginTime, jdbcType=BIGINT}
+				]]>
+			</if>
+			<if test="lastMsgId > 0">
+				<![CDATA[
+				AND tm.team_msg_id > #{lastMsgId, jdbcType=BIGINIT}
+				]]>
+			</if>
+		</if>
+		<if test="reverse == false">
+			<if test="endTime != null and endTime > 0">
+				<![CDATA[
+			 	AND tm.send_at < #{endTime, jdbcType=BIGINT}
+				]]>
+			</if>
+			<if test="lastMsgId > 0">
+				<![CDATA[
+				AND tm.id < #{lastMsgId, jdbcType=BIGINT}
+				]]>
+			</if>
+		</if>
+		<if test="reverse == asc">
+			ORDER BY
+			tm.send_at DESC
+		</if>
+		<if test="reverse != asc">
+			ORDER BY
+			tm.send_at ASC
+		</if>
+		LIMIT #{limit, jdbcType=DECIMAL}
+	</select>
+	
+	<select id="getLastMsgTimeByTeamId" resultType="java.lang.Long">
+		select send_at from <include refid="tableName"/> where team_id = #{teamId, jdbcType=BIGINT} order by send_at desc limit 1
+	</select>
+
+</mapper>
