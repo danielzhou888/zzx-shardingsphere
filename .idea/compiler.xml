@@ -6,6 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="zzx-db-table-read-write-java" />
+        <module name="zzx-db-read-write-java" />
         <module name="zzx-db-read-write" />
         <module name="db-table-read-write" />
       </profile>
@@ -13,6 +15,8 @@
     <bytecodeTargetLevel>
       <module name="db-table-read-write" target="1.8" />
       <module name="zzx-db-read-write" target="1.8" />
+      <module name="zzx-db-read-write-java" target="1.8" />
+      <module name="zzx-db-table-read-write-java" target="1.8" />
       <module name="zzx-shardingsphere" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -20,6 +24,8 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="db-table-read-write" options="-parameters" />
       <module name="zzx-db-read-write" options="-parameters" />
+      <module name="zzx-db-read-write-java" options="-parameters" />
+      <module name="zzx-db-table-read-write-java" options="-parameters" />
     </option>
   </component>
 </project>
