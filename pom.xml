@@ -33,7 +33,7 @@
         <!--        <shardingsphere.version>4.0.0-RC3</shardingsphere.version>-->
         <!--        <shardingsphere.version>4.0.0-RC2</shardingsphere.version>-->
         <fastjson.version>1.2.38</fastjson.version>
-        <mysql-connector-java.version>5.1.47</mysql-connector-java.version>
+        <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
     </properties>
 
     <dependencies>
